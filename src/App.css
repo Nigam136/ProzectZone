@@ -42,7 +42,7 @@
 }
 
 /* CSS to accomodate dark mode toggle swithc with navabar */
-.NavWithToggleSwitch {
+/* .NavWithToggleSwitch {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -50,23 +50,41 @@
   width: 100%;
   margin-left: 0 !important;
   overflow: hidden !important;
-   
-}
+} */
 
-.navlinks{
+/* .NavHeading-div{
   display: flex;
   flex-direction: row;
-}
+  height: 5rem;
+  width: 18rem;
+} */
 
-.links {
+/* .title{
+  height: 100%;
+  padding: 20px 0;
+} */
+
+/* .logo{
+  height: 100%;
+  width: auto;
+} */
+/* 
+ .navlinks{
+  display: flex;
+  flex-direction: row; 
+}  */
+
+/* .links {
   display: flex;
   flex-direction: row;
-}
-.fa-home,.fa-user,.fa-file,.fa-plus,.fa-id-badge,.fa-sign-in{
+} */
+
+/* .fa-home,.fa-user,.fa-file,.fa-plus,.fa-id-badge,.fa-sign-in{
     padding-right: 4px;
     font-size: 20px;
-}
-.lobut{
+} */
+
+/* .lobut{
   color: white;
   font-weight: 700;
   letter-spacing: 0.02857em;
@@ -77,11 +95,12 @@
   text-decoration: none;
   margin-top:-4px;
   margin-right: 10px;
-}
-.lobut:hover {
+} */
+
+/* .lobut:hover {
   background-color: transparent;
   color: #fff;
-}
+} */
 
 .loading_indicator {
   width: 100%;

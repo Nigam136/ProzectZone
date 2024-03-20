@@ -1,0 +1,150 @@
+.project {
+  margin-right: 1rem;
+  max-width: 21rem;
+  height: auto;
+  position: relative;
+  margin-top: 2rem;
+  align-items: flex-start;
+  box-shadow: 0 3px 5px -5px rgba(50, 50, 50, 0.75);
+  background-color: #fff;
+  transition: transform 0.3s;
+}
+
+.cardimg {
+    width: 100%;
+    height: auto;
+    /* background-color: aquamarine; */
+}
+
+.card-content {
+  padding: 1rem;
+}
+
+.title-flexbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  /* background-color: antiquewhite; */
+}
+
+.title {
+  width: 90%;
+  min-height: 50px;
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 18px !important;
+  font-weight: 500;
+  line-height: 26px !important;
+  color: rgba(0, 0, 0, 0.85);
+  letter-spacing: 0.5px;
+}
+
+.share-img {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.project:hover {
+  transform: scale(1.015);
+  -webkit-box-shadow: 0 3px 5px -3px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow: 0 3px 5px -3px rgba(50, 50, 50, 0.75);
+  box-shadow: 0 3px 5px -3px rgba(50, 50, 50, 0.75);
+}
+
+.descr {
+  margin: 0;
+  width: 100%;
+  margin: 0.5rem 0;
+  position: relative;
+}
+
+.description {
+  margin: 0;
+  max-height: 65px;
+}
+
+.read-more {
+  text-align: right;
+  margin: 0;
+  position: absolute;
+  bottom: -25px;
+  right: 0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 22px;
+  font-family: sans-serif;
+  color: rgba(0, 0, 0, 0.85);
+  letter-spacing: 0.5px;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}
+
+.level {
+  display: flex;
+  margin: 0;
+}
+
+.level label {
+  font-family: sans-serif;
+  font-size: 14px !important;
+  font-weight: 700;
+  line-height: 22px !important;
+  color: rgba(0, 0, 0, 0.85);
+  letter-spacing: 0.35px;
+}
+
+.level p {
+    letter-spacing: 0.8px;
+  font-family: sans-serif;
+  font-size: 14px !important;
+  font-weight: 400;
+  line-height: 22px !important;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.like-box {
+  margin: 10px 0;
+}
+
+.skills {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
+}
+
+.skill {
+  color: #fff;
+  padding: 0.5em 0.5em;
+  border-radius: 4px;
+  margin-right: 0.5em;
+  transition: all 0.1s;
+  cursor: pointer;
+  font-size: 14px;
+  /* line-height: 22px; */
+  letter-spacing: 0.9px;
+  font-weight: 400;
+  font-family: sans-serif;
+}
+
+.heart{
+    color: #ccc;
+    cursor: pointer;
+}
+.liked-heart{
+    color: red;
+}
+
+.far-fa-heart {
+  cursor: pointer;
+}
+
+.rating_div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0 0 0;
+}

@@ -1,0 +1,126 @@
+.NavWithToggleSwitch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-left: 0 !important;
+  overflow: hidden !important;
+  height: 1rem;
+  /* background-color: blue; */
+}
+
+.NavHeading-div {
+  display: flex;
+  flex-direction: row;
+  height: 5rem;
+  width: 18rem;
+  /* background-color:#fd6464; */
+}
+.title-project {
+  height: 100%;
+  padding-top: 18px;
+  font-family: sans-serif;
+  font-size: 30px;
+  line-height: 37px;
+}
+.logo {
+  height: 80%;
+  width: auto;
+  margin-top: 7px;
+}
+
+.navlinks {
+  display: flex;
+  flex-direction: row;
+}
+
+.links {
+  /* background-color: aqua; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+}
+.fa-home,
+.fa-user,
+.fa-file,
+.fa-plus,
+.fa-id-badge,
+.fa-sign-in {
+  padding-right: 4px;
+  margin-bottom:5px;
+}
+.fa-about{
+  padding-right: 4px;
+}
+
+.lobut {
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: sans-serif;
+  letter-spacing: 0.02857em;
+  background-color: #fd6464;
+  border: 2px solid #fff;
+  border-radius: 22px;
+  padding: 11px 12px;
+  text-decoration: none;
+  /* margin-top: -4px; */
+  /* margin: 10px 0; */
+  /* margin-right: 10px; */
+  display: flex;
+}
+.lobut:hover {
+  background-color: transparent;
+  color: #fff;
+}
+
+.name {
+  font-family: "Poppins";
+  color: #fff;
+  text-decoration: none;
+  margin-top: 3px;
+  background-color: black;
+  font-size: calc(1rem + 1vw);
+  font-weight: 700;
+}
+.name:hover{
+  color: #fff;
+}
+
+.text {
+  font-family: sans-serif;
+  color: #fff;
+  text-decoration: none;
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 25px;
+  
+  display: flex;
+  margin:0 5px;
+}
+.text div{
+  margin-top: 2px;
+}
+.text:hover {
+  color: #6c6be8;
+  /* background-color: #fff; */
+  border-radius: 5px;
+}
+
+
+.button {
+  color: #fff;
+  margin: 0 3px;
+  font-weight: 700;
+  text-decoration: none;
+  font-family: "Poppins";
+  margin-right: 3px !important;
+}
+.button:hover {
+  color: #6c6be8;
+  background-color: #fff !important;
+}
