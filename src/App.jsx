@@ -20,12 +20,13 @@ import Contact from "./components/Contact/Contact";
 import TrendingProjects from "./components/TrendingProjects/TrendingProjects";
 import ProjectDetails from "./components/ProjectDetails/ProjectDetails";
 import Showprojects from "./components/Showprojects/Showprojects";
-// import ScrollToTop from './components/ScrollComponent/ScrollToTop';
+import ScrollToTop from './components/ScrollComponent/ScrollToTop';
+import Profile from "./components/Profile/Profile";
 
 function App() {
   const [theme, setTheme] = useState("light");
   const [{ dashboard }, dispatch] = useDataLayerValues();
-  // console.log(dashboard);
+  console.log(dashboard);
 
   useEffect(() => {
     const loader = document.getElementById("pre-loader");
@@ -48,7 +49,8 @@ function App() {
   const getUser = async () => {
     try {
       const user = await profile();
-
+      
+      console.log("profile-getuser", user.data);
       const data = {
         ...user,
         userid: user.data._id,
@@ -83,13 +85,14 @@ function App() {
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <div className="App">
         <BrowserRouter>
-          {/* <ScrollToTop  /> */}
+          <ScrollToTop  />
           <Navbar themeToggler={themeToggler} />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route exact path="/projects" element={<Showprojects />} />
             <Route exact path="/trendings" element={<TrendingProjects />} />
-            {/* <Route exact path="/projectdetails/:projectid" element={<ProjectDetails />}/> */}
+            <Route exact path="/projectdetails/:projectid" element={<ProjectDetails />}/>
+            <Route exact path="/profile/:profileid" element={<Profile />} />
 
 
             {/* AUTH ROUTES */}
@@ -98,7 +101,6 @@ function App() {
             <Route path="/forgetpassword" element={<Forget />} />
             <Route path="/setnewpassword/:token" element={<SetPassword />} />
 
-            {/* <Route exact path="/profile/:profileid" component={Profile} /> */}
 
             {/* Other routes  */}
             <Route exact path="/about" element={<About />} />
