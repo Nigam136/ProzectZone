@@ -84,6 +84,7 @@ const Login = () => {
       const res = await login(body);
 
       if (!res.data.error) {
+        console.log("reached...", );
         localStorage.setItem("tokken", res.data.accesstoken);
 
         setIsLoading(false);
@@ -99,16 +100,17 @@ const Login = () => {
       }
     } catch (err) {
       if (err.response) {
-        setIsLoading(false);
         toast.error(`${err.response.data.error}`);
       }
+    }finally{
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="login">
       <Helmet title="Project Zone | Login" />
-      <ToastContainer position="top-right" className="toast"/>
+      <ToastContainer position="top-left" className="toast"/>
       <form className="loginform" onSubmit={handleSubmit}>
         <h1>Project Zone</h1>
         <p>Welcome back! Please login to your account</p>

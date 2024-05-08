@@ -14,6 +14,7 @@ import { Helmet } from "react-helmet";
 import SearchBox from "../SearchBox/SearchBox";
 import { useMediaQuery } from "@material-ui/core";
 
+
 const Option = styled.button`
   color: ${(props) => (props.optionColor ? props.optionColor : "#FFF")};
   min-width: ${(props) =>
@@ -52,16 +53,18 @@ const Showprojects = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [filter, setfilter] = useState({
-    beginner: true,
-    medium: true,
-    advanced: true,
+    Beginner: true,
+    Intermediate: true,
+    Advanced: true,
     added: false,
   });
   const [projects, setProjects] = useState([]);
   const [filteredprojects, setFilteredProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [{ dashboard, query, isAuthenticated }, dispatch] =
+  const [{ user, dashboard, query, isAuthenticated }, dispatch] =
     useDataLayerValues();
+
+    console.log("isAuthenticated", user.data);
 
   const classes = useStyles();
   const [dataCheck, setDatacheck] = useState("init");
@@ -76,31 +79,49 @@ const Showprojects = () => {
     "Python",
     "HTML",
     "CSS",
-    "ReactJS",
+    "React",
     "Java",
     "Express",
     "C++",
-    "nextjs",
+    "NextJS",
+    "C",
   ];
 
-  // C
   const defaultOptionsRow2 = [
     "FullStack",
-    "Flutter",
-    "Android",
+    "MongoDB",
+    "NodeJs",
+    "flutter",
+    "android",
     "MERN",
     "Backend",
     "Frontend",
     "OpenCV",
-    "ML",
+    "Artificial Intillegence",
   ];
 
-  // "AR",
-  // "VR"
+  const defaultOptionsRow3 = [
+    "Machine Learning",
+    "AR",
+    "VR",
+    "django",
+    "php",
+    "Kotlin",
+    "Blockchain",
+    "arduino",
+    "iot",
+  ];
+
   const [randomProject, setRandomProject] = useState("");
 
   const fetchProjects = async (queryoption = "", querytype = "Skill") => {
+    if(!isAuthenticated){
+      toast.error("Please login First!");
+      return;
+    }
     setIsLoading(true);
+    // console.log("queryoption", queryoption);
+    // console.log("querytype", querytype);
     const type = querytype.toLowerCase();
 
     try {
@@ -110,14 +131,14 @@ const Showprojects = () => {
         const results = await server.get(
           `/getprojectsby${type}?q=${queryoption}`
         );
-        if(results.status === 200){
+        if (results.status === 200) {
           setProjects(results.data);
           setFilteredProjects(results.data);
           setDatacheck("some data");
-        }else{
+        } else {
           setDatacheck("no data");
         }
-       
+
         setTotalPages(Math.ceil(results.data.length / itemsPerPage));
         setIsLoading(false);
       } else if (query !== "") {
@@ -142,6 +163,7 @@ const Showprojects = () => {
 
   const setDefaultQuery = (e) => {
     e.preventDefault();
+    // console.log("search", e.target.innerText);
     dispatch({
       type: "SET_QUERY",
       query: e.target.innerText,
@@ -162,14 +184,14 @@ const Showprojects = () => {
     const name = e.target.name;
 
     switch (name) {
-      case "beginner":
-        setfilter({ ...filter, beginner: !filter.beginner });
+      case "Beginner":
+        setfilter({ ...filter, Beginner: !filter.Beginner });
         break;
-      case "medium":
-        setfilter({ ...filter, medium: !filter.medium });
+      case "Intermediate":
+        setfilter({ ...filter, Intermediate: !filter.Intermediate });
         break;
-      case "advanced":
-        setfilter({ ...filter, advanced: !filter.advanced });
+      case "Advanced":
+        setfilter({ ...filter, Advanced: !filter.Advanced });
         break;
       case "added":
         setfilter({ ...filter, added: !filter.added });
@@ -188,16 +210,20 @@ const Showprojects = () => {
       return project;
   };
 
+  // useEffect(()=>{
+  //   if(isAuthenticated)
+  // },[isAuthenticated])
+
   useEffect(() => {
-    console.log(projects);
+    // console.log(projects);
     let filtered = projects?.filter((project) => filterByCheck(project));
     setFilteredProjects(filtered);
     setTotalPages(Math.ceil(filtered.length / itemsPerPage));
     setPage(1);
 
-    console.log(filteredprojects);
-    console.log(projects);
-    console.log(dataCheck);
+    // console.log(filteredprojects);
+    // console.log(projects);
+    // console.log(dataCheck);
   }, [projects, filter]);
 
   return (
@@ -207,22 +233,22 @@ const Showprojects = () => {
       <div className="mt">
         <SearchBox fetchProjects={fetchProjects} />
 
-        <div className=" default_options filtre-div">
+        <div className="default_options filtre-div">
           <label className="container">
             Beginner Level
             <input
               defaultChecked={true}
-              name="beginner"
+              name="Beginner"
               type="checkbox"
               onChange={checkboxHandler}
             />
             <span className="checkmark"></span>
           </label>
           <label className="container">
-            medium Level
+            Intermediate Level
             <input
               defaultChecked={true}
-              name="medium"
+              name="Intermediate"
               type="checkbox"
               onChange={checkboxHandler}
             />
@@ -232,7 +258,7 @@ const Showprojects = () => {
             Advanced Level
             <input
               defaultChecked={true}
-              name="advanced"
+              name="Advanced"
               type="checkbox"
               onChange={checkboxHandler}
             />
@@ -270,7 +296,23 @@ const Showprojects = () => {
             return (
               <Option
                 type="submit"
-                onClick={(e)=>setDefaultQuery(e)}
+                onClick={(e) => setDefaultQuery(e)}
+                value={query}
+                key={index}
+                option={option}
+                optionColor={getSkillColor(option)}
+              >
+                {option}
+              </Option>
+            );
+          })}
+        </div>
+        <div className="default_options">
+          {defaultOptionsRow3.map((option, index) => {
+            return (
+              <Option
+                type="submit"
+                onClick={(e) => setDefaultQuery(e)}
                 value={query}
                 key={index}
                 option={option}
@@ -346,12 +388,16 @@ const Showprojects = () => {
         ) : dataCheck === "no data" ? (
           <div style={{ textAlign: "center" }}>
             <h3>Oopps !! No projects found.</h3>
-            {isAuthenticated ? (
+            {user?.data?.isContributor ===true  ? (
               <Link to="/addnew">Add new project</Link>
             ) : (
-              <p>Login to add your projects on Project Zone</p>
+              <div className="mt-5">
+                <h3>You are not Contributor to the ProjectZone</h3>
+                <h5>To Become Contributor Fill Out This Form.</h5>
+                <Link to="/contributors-form" className="text-decoration-none btn">Make Contribution</Link>
+              </div>
             )}
-          </div>
+          </div> 
         ) : null}
       </div>
       {filteredprojects && filteredprojects.length > 0 && (

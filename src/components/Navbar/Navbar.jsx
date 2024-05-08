@@ -26,38 +26,6 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  // name: {
-  //   fontFamily: "Poppins",
-  //   color: "#fff",
-  //   textDecoration: "none",
-  //   marginTop: 3,
-  //   backgroundColor: "black",
-  //   fontSize: "calc(1rem + 1vw)",
-  //   fontWeight: "700",
-  //   "&:hover": {
-  //     color: "#fff",
-  //   },
-  // },
-  // text: {
-  //   fontFamily: "Poppins",
-  //   color: "#fff",
-  //   textDecoration: "none",
-  //   textTransform: "capitalize",
-  //   "&:hover": {
-  //     color: "#6c6be8",
-  //   },
-  // },
-  // button: {
-  //   color: "#fff",
-  //   margin: "0 3px",
-  //   fontWeight: "700",
-  //   textDecoration: "none",
-  //   fontFamily: "Poppins",
-  //   "&:hover": {
-  //     color: "#6c6be8",
-  //     backgroundColor: "#fff",
-  //   },
-  // },
 }));
 
 const StyledMenu = withStyles({
@@ -111,6 +79,7 @@ const Navbar = ({ themeToggler }) => {
   // console.log(classes);
   const [{ isAuthenticated, user }, dispatch] = useDataLayerValues();
   const [anchorEl, setAnchorEl] = useState(null);
+  console.log("qwertyu", user.data);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -162,7 +131,7 @@ const Navbar = ({ themeToggler }) => {
               </Link>
             </Typography>
           </div>
-          <div className="links" >
+          <div className="links">
             {isMobile ? (
               <>
                 <Button onClick={handleClick}>
@@ -213,6 +182,7 @@ const Navbar = ({ themeToggler }) => {
                       </StyledMenuItem>
                     </Link>
                   ) : null}
+
                   <Link to="/about" onClick={handleClose}>
                     <StyledMenuItem>
                       <ListItemIcon>
@@ -221,6 +191,7 @@ const Navbar = ({ themeToggler }) => {
                       <ListItemText primary="About"></ListItemText>
                     </StyledMenuItem>
                   </Link>
+
                   {isAuthenticated ? (
                     <Link to="/addnew" onClick={handleClose}>
                       <StyledMenuItem>
@@ -248,11 +219,107 @@ const Navbar = ({ themeToggler }) => {
                 <div>
                   <Button className="button">
                     <Link to="/" className="text">
-                      <img src="/svgs/Home.svg" alt="home" className="fa-home"/>
+                      <img
+                        src="/svgs/Home.svg"
+                        alt="home"
+                        className="fa-home"
+                      />
                       <div>Home</div>
                     </Link>
                   </Button>
                 </div>
+                <div>
+                  <Button className="button">
+                    <Link to="/projects" className="text">
+                      <img
+                        src="/svgs/File.svg"
+                        alt="file"
+                        className="fa-file"
+                      />
+                      <div>Find Projects</div>
+                    </Link>
+                  </Button>
+                </div>
+                <div>
+                  
+                </div>
+                <div>
+                  {user.data?.role === "admin" ? <Button className="button">
+                      <Link to="/payments" className="text">
+                        <img
+                          src="/svgs/Users.svg"
+                          alt="about"
+                          className="fa-about"
+                        />
+                        <div>Payments</div>
+                      </Link>
+                    </Button> : (
+                    <Button className="button">
+                      <Link to="/about" className="text">
+                        <img
+                          src="/svgs/Users.svg"
+                          alt="about"
+                          className="fa-about"
+                        />
+                        <div>About</div>
+                      </Link>
+                    </Button>
+                  )}
+                </div>
+                {isAuthenticated && user.data?.role == "user" ? (
+                  <div>
+                    <Button className="button">
+                      <Link to="/contact" className="text">
+                        <img
+                          src="/svgs/id-badge.svg"
+                          alt="new project"
+                          className="fa-id-badge"
+                        />
+                        <div>Contact Us</div>
+                      </Link>
+                    </Button>
+                  </div>
+                ) : isAuthenticated ? (
+                  <div>
+                    <Button className="button">
+                      <Link to="/contributors" className="text">
+                        <img
+                          src="/svgs/bell.svg"
+                          alt="new project"
+                          className="fa-id-badge"
+                        />
+                        <div>Contributors</div>
+                      </Link>
+                    </Button>
+                  </div>
+                ) : null}
+                {isAuthenticated && user.data?.isContributor === true ? (
+                  <div>
+                    <Button className="button">
+                      <Link to="/addnew" className="text">
+                        <img
+                          src="/svgs/Plus.svg"
+                          alt="new project"
+                          className="fa-plus"
+                        />
+                        <div>Add New Project</div>
+                      </Link>
+                    </Button>
+                  </div>
+                ) : isAuthenticated && user.data?.isContributor === false ? (
+                  <div>
+                    <Button className="button">
+                      <Link to="/contributors-form" className="text">
+                        <img
+                          src="/svgs/handshake.svg"
+                          alt="new Contribution"
+                          className="handshake"
+                        />
+                        <div>Make Contribution</div>
+                      </Link>
+                    </Button>
+                  </div>
+                ) : null}
                 {isAuthenticated ? (
                   <Button className="button">
                     <Link
@@ -260,46 +327,14 @@ const Navbar = ({ themeToggler }) => {
                       to={`/profile/${user.userid}`}
                       className="text"
                     >
-                      <img src="/svgs/user-circle.svg" alt="user-circle" className="fa-user"/>
+                      <img
+                        src="/svgs/user-circle.svg"
+                        alt="user-circle"
+                        className="fa-user"
+                      />
                       <div>Welcome {user.fname}</div>
                     </Link>
                   </Button>
-                ) : null}
-                <div>
-                  <Button className="button">
-                    <Link to="/about" className="text">
-                      <img src="/svgs/Users.svg" alt="about" className="fa-about" />
-                      <div>About</div>
-                    </Link>
-                  </Button>
-                </div>
-                <div>
-                  <Button className="button">
-                    <Link to="/projects" className="text">
-                      <img src="/svgs/File.svg" alt="file" className="fa-file" />
-                      <div>Find Projects</div>
-                    </Link>
-                  </Button>
-                </div>
-                {isAuthenticated ? (
-                  <div>
-                    <Button className="button">
-                      <Link to="/addnew" className="text">
-                        <img src="/svgs/Plus.svg" alt="new project" className="fa-plus"/>
-                        <div>Add New Project</div>
-                      </Link>
-                    </Button>
-                  </div>
-                ) : null}
-                {isAuthenticated ? (
-                  <div>
-                    <Button className="button">
-                      <Link to="/contact" className="text">
-                        <img src="/svgs/id-badge.svg" alt="new project" className="fa-id-badge"/>
-                        <div>Contact Us</div>
-                      </Link>
-                    </Button>
-                  </div>
                 ) : null}
                 {!isAuthenticated ? (
                   <Link to="/login" className="lobut">

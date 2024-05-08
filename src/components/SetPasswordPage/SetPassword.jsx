@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./SetPassword.css";
 import { ToastContainer, toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { SetNewPassword } from "../../axios/instance";
 import { Helmet } from "react-helmet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +10,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 const SetPassword = () => {
   const [done, setDone] = useState(false);
   const { token } = useParams();
+  const navigate = useNavigate()
 
   const [password, setpassword] = useState("");
   const [confirmpassword, setconfirmpassword] = useState("");
@@ -56,6 +57,7 @@ const SetPassword = () => {
       const res = await SetNewPassword(data);
       if (!res.data.err) {
         setDone(!done);
+        navigate('/login')
         toast.success(`${res.data.msg}`);
       }
     } catch (err) {

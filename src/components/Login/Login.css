@@ -231,6 +231,7 @@ cursor: pointer;
 -moz-user-select: none;
 -ms-user-select: none;
 user-select: none;
+width: 12rem;
 }
 
 .container input {

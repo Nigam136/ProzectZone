@@ -14,11 +14,13 @@ import "./ShareProject.css";
 import PropTypes from "prop-types";
 
 const ShareProject = (props) => {
-  const url = `https://project-zone.tech/${props.id}`;
+  // const url = `https://project-zone.tech/${props.id}`;
+  const url = `http://localhost:5173/projectdetails/${props.id}`;
+  
 
-  const quote = `Hello everyone, I found an awesome project for you i.e Title : ${props.title} ${props.description}
-                Have a look at it and if you like the project idea go ahead an make it reality.
-                To know more about the project or to find other similar projects visit - `;
+  const quote = `Hello everyone, I found an awesome project for you - Title : ${props.title}
+  Have a look at it and if you like the project idea go ahead an make it reality.
+  To know more about the project or to find other similar projects visit - `;
 
   return (
     <div className="share-conatiner" style={props.style}>

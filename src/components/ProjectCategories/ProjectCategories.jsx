@@ -19,6 +19,7 @@ const ProjectCategories = () => {
     });
     navigate("/projects");
   };
+  
 
   return (
     <>
@@ -28,7 +29,7 @@ const ProjectCategories = () => {
         </div>
         <div className="categories-card">
           <div className="React-card allcard">
-            <button className="expbtn" value="react" onClick={handleOnclick}>
+            <button className="expbtn" value="React" onClick={handleOnclick}>
               Explore
             </button>
             <div className="allcard-title">
@@ -50,7 +51,7 @@ const ProjectCategories = () => {
             <img src={appdev} className="android" alt="android" />
           </div>
           <div className="Python-card allcard">
-            <button className="expbtn" value="python" onClick={handleOnclick}>
+            <button className="expbtn" value="Python" onClick={handleOnclick}>
               Explore
             </button>
             <div className="allcard-title">
@@ -63,7 +64,7 @@ const ProjectCategories = () => {
           <div className="JavaScript-card allcard">
             <button
               className="expbtn"
-              value="javascript"
+              value="JavaScript"
               onClick={handleOnclick}
             >
               Explore
@@ -76,7 +77,7 @@ const ProjectCategories = () => {
             <img className="js" src={javascript} alt="javascript" />
           </div>
           <div className="Webdev-card allcard">
-            <button className="expbtn" value="mern" onClick={handleOnclick}>
+            <button className="expbtn" value="MERN" onClick={handleOnclick}>
               Explore
             </button>
             <div className="allcard-title">

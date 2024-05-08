@@ -13,7 +13,6 @@ import Project from "../Project/Project";
 const Home = () => {
 
   const [isLoading, setIsLoading] = useState(false);
-  console.log(setIsLoading);
 
   return (
     <div className="home">

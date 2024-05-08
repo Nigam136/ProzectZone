@@ -1,3 +1,29 @@
+.details_card {
+  width: 80%;
+  padding: 2rem;
+  margin-top: 3rem;
+  border-radius: 0px;
+  box-shadow: 6px 7px 4px -6px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.062);
+  display: flex;
+  flex-direction: column;
+  min-height: 50vh;
+  background-color: #FFF;
+  z-index: 1;
+}
+
+#details_card{
+  align-items: center;
+  justify-content: center;
+
+}
+
+.payment_info{
+  font-size: 1.5rem;
+  text-align: center;
+  /* padding: 2rem; */
+}
+
 .project_details_container {
     width: 100%;
     margin-top: 10vh;
@@ -33,6 +59,9 @@
     background: #6c6be8;
     margin: 20px 0;
     display: inline-block;
+  }
+  .comment_btn h2{
+   font-size: 1.2rem;
   }
   
   .comment_btn:hover {
@@ -101,6 +130,7 @@
   .comment_user h2 {
     color: #6f6ee1;
     font-weight: bold;
+    font-size: 1.5rem;
     font-family: "Poppins";
   }
   
@@ -144,6 +174,11 @@
     padding: 1rem;
     margin-top: 1rem;
     border-left: 2px solid #6f6ee1;
+  }
+
+  .comment_user_name{
+    font-size: 1.5rem;
+    color: #6c6be8;
   }
   
   .comment_desc {

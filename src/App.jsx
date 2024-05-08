@@ -20,12 +20,19 @@ import Contact from "./components/Contact/Contact";
 import TrendingProjects from "./components/TrendingProjects/TrendingProjects";
 import ProjectDetails from "./components/ProjectDetails/ProjectDetails";
 import Showprojects from "./components/Showprojects/Showprojects";
-import ScrollToTop from './components/ScrollComponent/ScrollToTop';
+import ScrollToTop from "./components/ScrollComponent/ScrollToTop";
 import Profile from "./components/Profile/Profile";
+// import NewProfile from "./components/Profile/NewProfile";
+import AddNewProject from "./components/AddNewProject/AddNewProject";
+import VerifyEmailPage from "./components/VerifyEmailPage/VerifyEmailPage";
+import Contributors from "./components/contributors/Contributors";
+import ContributorList from "./components/contributors/ContributorList";
+import SuccessPage from "./components/SuccessPage/SuccessPage";
+import PaymentList from "./components/PaymentList/PaymentList";
 
 function App() {
   const [theme, setTheme] = useState("light");
-  const [{ dashboard }, dispatch] = useDataLayerValues();
+  const [{dashboard}, dispatch] = useDataLayerValues();
   console.log(dashboard);
 
   useEffect(() => {
@@ -49,7 +56,7 @@ function App() {
   const getUser = async () => {
     try {
       const user = await profile();
-      
+
       console.log("profile-getuser", user.data);
       const data = {
         ...user,
@@ -77,6 +84,7 @@ function App() {
     }
   };
 
+
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
@@ -85,15 +93,19 @@ function App() {
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <div className="App">
         <BrowserRouter>
-          <ScrollToTop  />
+          <ScrollToTop />
           <Navbar themeToggler={themeToggler} />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route exact path="/projects" element={<Showprojects />} />
             <Route exact path="/trendings" element={<TrendingProjects />} />
-            <Route exact path="/projectdetails/:projectid" element={<ProjectDetails />}/>
+            <Route
+              exact
+              path="/projectdetails/:projectid"
+              element={<ProjectDetails />}
+            />
+            <Route exact path="/projectdetails/:userid/:projectid" element={<SuccessPage />} />
             <Route exact path="/profile/:profileid" element={<Profile />} />
-
 
             {/* AUTH ROUTES */}
             <Route path="/login" element={<Login />} />
@@ -101,6 +113,18 @@ function App() {
             <Route path="/forgetpassword" element={<Forget />} />
             <Route path="/setnewpassword/:token" element={<SetPassword />} />
 
+            {/* ADD NEW PROJECT ROUTES */}
+            <Route exact path="/addnew" element={<AddNewProject />} />
+            <Route exact path="/contributors-form" element={<Contributors />} />
+            <Route exact path="/contributors" element={<ContributorList />} />
+            <Route exact path="/payments" element={<PaymentList />} />
+            
+            {/* ADD NEW PROJECT ROUTES */}
+            <Route
+              exact
+              path="/project-zone/verify-email/:tokenemail"
+              element={<VerifyEmailPage />}
+            />
 
             {/* Other routes  */}
             <Route exact path="/about" element={<About />} />

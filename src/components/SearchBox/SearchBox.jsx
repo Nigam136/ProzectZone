@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { useCallback, useEffect, useState } from "react";
 import { useDataLayerValues } from "../../datalayer";
-import {ArrowDropDownCircle, SearchOutlined} from "@material-ui/icons";
+import { ArrowDropDownCircle, SearchOutlined } from "@material-ui/icons";
 import { Autocomplete } from "@material-ui/lab";
 // import {ArrowDropDownIcon} from '@material-ui/icons';
 
@@ -33,30 +33,35 @@ const SearchBox = ({ fetchProjects }) => {
   const [placeholder, setPlaceholder] = useState(
     "e.g. reactjs (press space to focus)"
   );
+
   const searchOptions = [
-    "reactjs",
-    "javascript",
-    "java",
-    "python",
-    "frontend",
-    "backend",
-    "fullstack",
+    "React",
+    "NextJS",
+    "NodeJs",
+    "MongoDB",
+    "Express",
+    "JavaScript",
+    "Java",
+    "Python",
+    "Frontend",
+    "Backend",
+    "FullStack",
     "flutter",
-    "ar",
-    "vr",
-    "html",
-    "css",
-    "opencv",
-    "c++",
-    "c",
-    "mern",
-    "ml",
-    "ai",
-    "machine learning",
+    "android",
+    "HTML",
+    "CSS",
+    "OpenCV",
+    "C++",
+    "C",
+    "MERN",
+    "Artificial Intillegence",
+    "Machine Learning",
     "php",
     "django",
     "arduino",
     "iot",
+    "AR",
+    "VR",
   ];
 
   const handleTypesSeen = () => {
@@ -64,15 +69,16 @@ const SearchBox = ({ fetchProjects }) => {
   };
 
   const handleSelect = (event) => {
-    setQueryType(event.target.value);
+    setQueryType(event.target.innerHTML);
     setTypesSeen(!typesSeen);
   };
+
   const handleSpaceKeyPress = useCallback((event) => {
     const { keyCode } = event;
     if (keyCode === 32) {
       event.preventDefault();
       document.getElementById("searchboxinput").focus();
-      setPlaceholder("e.g. reactjs");
+      setPlaceholder("e.g. ReactJS");
     }
   }, []);
 
@@ -85,17 +91,18 @@ const SearchBox = ({ fetchProjects }) => {
   });
 
   const handleSubmit = (e) => {
+    console.log("handlesubmiut");
     e.preventDefault();
     dispatch({
       type: "SET_QUERY",
       query: querySearch,
     });
-    console.log(query,"  ",querySearch);
+    console.log("handlesubmiut", querySearch);
     fetchProjects(querySearch, querytype);
   };
 
   return (
-    <div className="searchBox"> 
+    <div className="searchBox">
       <div className="input">
         <SearchOutlined onClick={fetchProjects} style={{ cursor: "pointer" }} />
         <form onSubmit={handleSubmit} className="search_form">
@@ -105,8 +112,7 @@ const SearchBox = ({ fetchProjects }) => {
             options={querytype === "Skill" ? searchOptions : []}
             value={querySearch}
             onChange={(e) => {
-              setQuerySearch(e.target.value)
-              console.log(e.target.value)
+              setQuerySearch(e.target.innerHTML);
             }}
             freeSolo={querytype === "Name"}
             classes={{ option: classes.option }}
@@ -117,7 +123,9 @@ const SearchBox = ({ fetchProjects }) => {
                   placeholder={placeholder}
                   className={classes.input}
                   value={querySearch}
-                  onChange={(e) => setQuerySearch(e.target.value)}
+                  onChange={(e) => {
+                    setQuerySearch(e.target.value);
+                  }}
                   {...params.inputProps}
                 />
               </div>

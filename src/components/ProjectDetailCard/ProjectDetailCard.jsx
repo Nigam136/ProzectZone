@@ -18,19 +18,22 @@ const ProjectDetailCard = () => {
   const [{ ProjectDetails, dashboard, isAuthenticated }, dispatch] =
     useDataLayerValues();
   const [shareopen, setshareopen] = useState(false);
-  const [likescount, setLikesCount] = useState(ProjectDetails.likes);
+  const [likescount, setLikesCount] = useState(ProjectDetails?.likes);
   const [liked, setLiked] = useState(
-    dashboard.projects_liked.indexOf(ProjectDetails.id) !== -1
+    dashboard?.projects_liked.indexOf(ProjectDetails?.id) !== -1
   );
   const [rated, setRated] = useState(
-    dashboard.projects_rated.indexOf(ProjectDetails.id) !== -1
+    dashboard?.projects_rated.indexOf(ProjectDetails?.id) !== -1
   );
   const [modalVisibility, setModalVisibility] = useState("false");
-  const [ratinggiven, setRatingGiven] = useState(ProjectDetails.rating);
+  const [ratinggiven, setRatingGiven] = useState(ProjectDetails?.rating);
+  // const [sentDesc, setSentDesc] = useState( );
   const [newbadge,setNewBadge] = useState({
     title:"",
     badge_description: ""
   });
+
+  
 
   const toggleModalVisibility = () =>
   {
@@ -85,13 +88,14 @@ const ProjectDetailCard = () => {
         let badgedata = {};
         switch (dashboard.projects_liked.length + 1)
         {
-          case 10: badgedata = { title: 'Bronze in liking', badge_description: 'Liked 10+ projects' }; break;
-          case 50: badgedata = { title: 'Silver in liking', badge_description: 'Liked 50+ projects' }; break;
-          case 100: badgedata = { title: 'Gold in liking', badge_description: 'Liked 100+ projects' }; break;
+          case 3: badgedata = { title: 'Bronze in liking', badge_description: 'Liked 10+ projects' }; break;
+          case 6: badgedata = { title: 'Silver in liking', badge_description: 'Liked 50+ projects' }; break;
+          case 10: badgedata = { title: 'Gold in liking', badge_description: 'Liked 100+ projects' }; break;
         }
-
+        console.log("qwertyui",badgedata);
         if (Object.keys(badgedata).length !== 0)
         {
+          console.log("qwertyui",badgedata);
           const res = await AddBadge(badgedata);
           if (!res.data.error)
           {
@@ -175,9 +179,9 @@ const ProjectDetailCard = () => {
         let badgedata = {};
         switch (dashboard.projects_rated.length + 1)
         {
-          case 10  : badgedata =  { title: 'Bronze in rating', badge_description: 'Rated 10+ projects'}; break;
-          case 50  : badgedata =  { title: 'Silver in rating', badge_description: 'Rated 50+ projects'}; break;
-          case 100 : badgedata =  { title: 'Gold in rating', badge_description: 'Rated 100+ projects'};  break;
+          case 3  : badgedata =  { title: 'Bronze in rating', badge_description: 'Rated 10+ projects'}; break;
+          case 6  : badgedata =  { title: 'Silver in rating', badge_description: 'Rated 50+ projects'}; break;
+          case 10 : badgedata =  { title: 'Gold in rating', badge_description: 'Rated 100+ projects'};  break;
         }
 
         if (Object.keys(badgedata).length !== 0)
@@ -229,7 +233,6 @@ const ProjectDetailCard = () => {
       {shareopen ? (
         <ShareProject
           title={ProjectDetails.title}
-          description={""}
           id={ProjectDetails.id}
           style={{right : "10%", marginTop:"3rem"}}
         />

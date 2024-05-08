@@ -1,0 +1,121 @@
+.table_div {
+  position: relative;
+  margin: 4.3rem 0rem 10rem 0.5rem;
+  width: 99%;
+  min-height: 36.73vh;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table_div_heading{
+  color: #5352ed;
+  font-size: 40px;
+  margin: 25px auto;
+
+}
+#table_head {
+  background-color: #f8f9fa;
+}
+#table_head th {
+  padding: 10px;
+  text-align: left;
+}
+#table_body td {
+  padding: 10px;
+  text-align: left;
+}
+.disabled{
+  display: none;
+}
+
+#table_body td:nth-child(1) {
+  max-width: 20px;
+}
+
+#table_body td:nth-child(2) {
+  max-width: 50px;
+  overflow-x: scroll;
+}
+
+#table_body td:nth-child(3) {
+  max-width: 130px;
+  overflow-x: scroll;
+}
+
+#table_body td:nth-child(4) {
+  max-width: 150px;
+  overflow-x: scroll;
+}
+
+#table_body td:nth-child(5) {
+  max-width: 120px;
+  overflow-x: scroll;
+}
+
+#table_body td:nth-child(6) {
+  max-width: 20px;
+  overflow-x: scroll;
+}
+
+#table_body td:nth-child(7) {
+  max-width: 100px;
+  overflow-x: scroll;
+}
+
+#table_body td:nth-child(8) {
+  max-width: 50px;
+  /* background-color: aqua; */
+  /* text-align: center !important; */
+}
+
+#table_head th:nth-child(1) {
+  max-width: 30px;
+}
+#table_head th:nth-child(2) {
+  max-width: 10px;
+}
+#table_head th:nth-child(5) {
+  max-width: 50px;
+}
+#table_head th:nth-child(4) {
+  max-width: 90px;
+}
+#table_head th:nth-child(6) {
+  max-width: 50px;
+}
+#table_head th:nth-child(7) {
+  /* max-width: 130px; */
+}
+#table_head th:nth-child(8) {
+  /* max-width: 20px; */
+}
+
+.acceptbtn {
+  border: 2px solid #5352ed;
+  background-color: #5352ed;
+  cursor: pointer;
+  color: #fff;
+  margin-right: 20px;
+  margin-top: 1rem;
+  padding: 10px 20px;
+  width: 110px;
+  box-shadow: -1px 3px 3px rgba(0, 0, 0, 0.4);
+  font-size: 13px;
+}
+
+.rejectbtn {
+  width: 110px;
+  margin-top: 0.7rem;
+  margin-right: 20px;
+  padding: 10px 20px;
+  border: 2px solid #5352ed;
+  background-color: #fff;
+  box-shadow: -1px 3px 3px rgba(0, 0, 0, 0.4);
+  color: #5352ed;
+  cursor: pointer;
+  font-size: 13px;
+}

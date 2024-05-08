@@ -8,12 +8,22 @@ import {
   AddFollower,
   GetUserProfile,
   UpdateUserData,
+  sendverifyemail,
 } from "../../axios/instance";
 import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import { Oval, Puff } from "react-loading-icons";
-import { getSkillColor } from "../../utils";
+// import { getSkillColor } from "../../utils";
+import { GitHub } from "@material-ui/icons";
+import { LinkedIn } from "@material-ui/icons";
+import { Facebook } from "@material-ui/icons";
+import { Edit } from "@material-ui/icons";
+import closeButton from "../../assets/close.svg";
+import certificate from "./../../assets/certi.svg";
+import heart from "./../../assets/heart.svg";
+import star from "./../../assets/star1.svg";
+import { BlurCircular as AddCircle } from "@material-ui/icons";
 
 const Profile = () => {
   const [{ dashboard, user, isemailverified, isAuthenticated }, dispatch] =
@@ -25,6 +35,9 @@ const Profile = () => {
   const { data } = usePalette(dashboard.profile_pic);
   const navigate = useNavigate();
   const { profileid } = useParams();
+
+  console.log("dashboard", dashboard);
+  // console.log("user", dashboard.badge.badge_description);
 
   const fetchProfile = async (id) => {
     setIsLoading(true);
@@ -115,7 +128,6 @@ const Profile = () => {
     people: [],
   });
 
- 
   const toggleEditModalVisibility = () => {
     setEditModalVisibility(!editmodalVisibility);
   };
@@ -290,24 +302,19 @@ const Profile = () => {
     }
   };
 
-  //   const emailVerifyBtn = async () =>
-  //   {
-  //     try
-  //     {
-  //       const res = await sendverifyemail();
-  //       if (res.status === 200)
-  //       {
-  //         window.alert(res.data.msg);
-  //         toast.success(res.data.msg);
-  //       }
-  //     } catch (err)
-  //     {
-  //       if (err.response)
-  //       {
-  //         toast.error(`${ err.response.data.error }`);
-  //       }
-  //     }
-  //   };
+  const emailVerifyBtn = async () => {
+    try {
+      const res = await sendverifyemail();
+      if (res.status === 200) {
+        window.alert(res.data.msg);
+        toast.success(res.data.msg);
+      }
+    } catch (err) {
+      if (err.response) {
+        toast.error(`${err.response.data.error}`);
+      }
+    }
+  };
 
   return (
     <>
@@ -337,10 +344,12 @@ const Profile = () => {
                 )}
               </div>
               <div className="card_content">
-                <h1>{dashboard.fname + " " + dashboard.lname}</h1>
-                <h3>
+                <div className="card_name">
+                  {dashboard.fname + " " + dashboard.lname}
+                </div>
+                <div className="card_bio">
                   {dashboard.bio === "" ? <i>No bio set</i> : dashboard.bio}
-                </h3>
+                </div>
                 <div className="social_icons">
                   {dashboard.social_links ? (
                     <>
@@ -351,7 +360,7 @@ const Profile = () => {
                           target="_blank"
                           className="githublink"
                         >
-                          <i className="fab fa-github"></i>
+                          <GitHub />
                         </a>
                       ) : null}
                       {!dashboard.social_links.linkdin == "" ? (
@@ -360,7 +369,7 @@ const Profile = () => {
                           target="_blank"
                           className="linkedinlink"
                         >
-                          <i className="fab fa-linkedin"></i>
+                          <LinkedIn />
                         </a>
                       ) : null}
                       {!dashboard.social_links.facebook == "" ? (
@@ -369,13 +378,16 @@ const Profile = () => {
                           target="_blank"
                           className="facebooklink"
                         >
-                          <i className="fab fa-facebook"></i>
+                          <Facebook />
                         </a>
                       ) : null}
                     </>
                   ) : null}
                 </div>
-                <h3>Projectones : {dashboard.projectones}</h3>
+                <div className="projectones">
+                  <div className="tones_name">Projectones:-&nbsp;</div>{" "}
+                  <div>{dashboard.projectones}</div>
+                </div>
                 {dashboard.id === user.userid ? (
                   <>
                     <button
@@ -392,8 +404,7 @@ const Profile = () => {
                         <strong>Email Verified </strong> <CheckCircleIcon />
                       </div>
                     ) : (
-                      // <button className="editbtn" onClick={emailVerifyBtn}>
-                      <button className="editbtn" onClick={() => {}}>
+                      <button className="editbtn" onClick={emailVerifyBtn}>
                         Verify Email
                       </button>
                     )}
@@ -404,14 +415,20 @@ const Profile = () => {
             <div className="content_right">
               <div className="email_descr">
                 <div className="emaildesc_left">
-                  <h3> {dashboard.email} </h3>
-                  <p>
+                  <div className="mail">
+                    <h2>Email: </h2>
+                    <div> {dashboard.email}</div>{" "}
+                  </div>
+                  <div className="desc">
                     {dashboard.description === "" ? (
                       <i>No Description Added</i>
                     ) : (
-                      dashboard.description
+                      <>
+                        <div className="desc_head">Description: </div>
+                        <div>{dashboard.description}</div>
+                      </>
                     )}
-                  </p>
+                  </div>
                 </div>
                 <div className="follow_right">
                   {dashboard.id !== user.userid ? (
@@ -446,50 +463,56 @@ const Profile = () => {
                   <ul className="projects_list">
                     {dashboard.projects_added.map((project, i) => {
                       return (
-                        <li key={i}>
-                          <Link
-                            to={`/projectdetails/${project.project_id}`}
-                            className="link"
-                          >
-                            <i className="fa fa-circle"></i>
-                            {project.name}
-                          </Link>
-                        </li>
+                        <div className="list_card" key={i}>
+                          <li className="list_li">
+                            <Link
+                              to={`/projectdetails/${project.project_id}`}
+                              className="link"
+                            >
+                              <AddCircle />
+                              <div className="proj_name">{project.name}</div>
+                            </Link>
+                            <div className="user_name">
+                              <div className="added">Added By:-&nbsp; </div>
+                              {dashboard.fname} {dashboard.lname}
+                            </div>
+                          </li>
+                        </div>
                       );
                     })}
                   </ul>
                 ) : (
                   <i>No Projects added </i>
                 )}
-                <h2>Badges</h2>
+                <div className="badge_head">
+                  <h2>Badges</h2>
+                </div>
                 {dashboard.badges && dashboard.badges.length > 0 ? (
                   <div className="badges_list">
                     {dashboard.badges.map((badge, i) => {
                       return (
                         <div className="badge_container" key={i}>
-                          <i
-                            className={
-                              badge.badge_description
-                                .split(" ")
-                                .slice(0, 1)
-                                .includes("Liked")
-                                ? `fa fa-heart`
-                                : badge.badge_description
-                                    .split(" ")
-                                    .slice(0, 1)
-                                    .includes("Rated")
-                                ? `fa fa-star`
-                                : `fa fa-certificate`
-                            }
-                            style={{
-                              color: getSkillColor(
-                                badge.title.split(" ").slice(0, 1).join(" ")
-                              ),
-                            }}
-                          ></i>
-                          <h2>{badge.title}</h2>
-                          <p>{badge.badge_description}</p>
-                          <span>
+                          {badge.badge_description
+                            .split(" ")
+                            .slice(0, 1)
+                            .includes("Liked") ? (
+                            <img className="heart" src={heart} alt="heart" />
+                          ) : badge.badge_description
+                              .split(" ")
+                              .slice(0, 1)
+                              .includes("Rated") ? (
+                            <img className="star" src={star} alt="star" />
+                          ) : (
+                            <img
+                              className="certificate"
+                              src={certificate}
+                              alt="certifiacte"
+                            />
+                          )}
+
+                          <div className="badge_title">{badge.title}</div>
+                          <p className="badge_dsc">{badge.badge_description}</p>
+                          <span className="badge_date">
                             Earned on{" "}
                             {badge.earnedat.split(" ").slice(0, 2).join(" ")}
                           </span>
@@ -524,19 +547,22 @@ const Profile = () => {
                         <img src={fields.profileimg} alt="user_profile_img" />
                       )}
                       <div className="img_overlay">
-                        <i className="fas fa-edit">
+                        <div className="fa-edit">
+                          <Edit />
                           <input
                             name="profileimg"
                             className="image-upload"
                             type="file"
                             onChange={handlechnageInput}
                           />
-                        </i>
+                        </div>
                       </div>
                     </div>
 
                     <div className="social_info ">
-                      <i className="fab fa-github"></i>
+                      <div className="social_icon">
+                        <GitHub />
+                      </div>
                       <input
                         className="social_input"
                         name="githublink"
@@ -546,7 +572,9 @@ const Profile = () => {
                       ></input>
                     </div>
                     <div className="social_info">
-                      <i className="fab fa-linkedin"></i>
+                      <div className="social_icon">
+                        <LinkedIn />
+                      </div>
                       <input
                         className="social_input"
                         name="linkedinlink"
@@ -556,7 +584,10 @@ const Profile = () => {
                       ></input>
                     </div>
                     <div className="social_info">
-                      <i className="fab fa-facebook"></i>
+                      <div className="social_icon">
+                        {" "}
+                        <Facebook />
+                      </div>
                       <input
                         className="social_input"
                         name="fblink"
@@ -647,7 +678,11 @@ const Profile = () => {
                     className="editmodal_closebar"
                     onClick={toggleEditModalVisibility}
                   >
-                    <i className="fa fa-times"></i>
+                    <img
+                      src={closeButton}
+                      alt="close"
+                      className="editmodal_close_img"
+                    />
                   </div>
                 </form>
               </>
@@ -674,8 +709,8 @@ const Profile = () => {
                           onClick={toggleFollowModalVisibility}
                           className="link"
                         >
-                          <i className="fa fa-circle"></i>
-                          {person.fname}
+                          <AddCircle />
+                          <div className="proj_name"> {person.fname}</div>
                         </Link>
                       </li>
                     );
@@ -688,7 +723,11 @@ const Profile = () => {
                 className="editmodal_closebar"
                 onClick={toggleFollowModalVisibility}
               >
-                <i className="fa fa-times"></i>
+                <img
+                  src={closeButton}
+                  alt="close"
+                  className="editmodal_close_img"
+                />
               </div>
             </div>
           </div>

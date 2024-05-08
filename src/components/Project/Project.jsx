@@ -58,19 +58,19 @@ const Project = (props) => {
 
         let badgedata = {};
         switch (dashboard.projects_liked.length + 1) {
-          case 10:
+          case 3:
             badgedata = {
               title: "Bronze in liking",
               badge_description: "Liked 10+ projects",
             };
             break;
-          case 50:
+          case 6:
             badgedata = {
               title: "Silver in liking",
               badge_description: "Liked 50+ projects",
             };
             break;
-          case 100:
+          case 10:
             badgedata = {
               title: "Gold in liking",
               badge_description: "Liked 100+ projects",
